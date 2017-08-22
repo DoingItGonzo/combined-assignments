@@ -1,5 +1,7 @@
 package com.cooksys.ftd.assignments.control;
 
+import java.util.Arrays;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -24,8 +26,11 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given index is less than zero
      */
     public static int atIndex(int i) throws IllegalArgumentException {
-        throw new NotImplementedException();
-    }
+        if (i < 0) {
+        	throw new IllegalArgumentException();
+        }
+        return (fibonacci(i+1))[i];
+        }
 
     /**
      * Calculates a slice of the fibonacci sequence, starting from a given start index (inclusive) and
@@ -38,7 +43,10 @@ public class Fibonacci {
      *                                  given end is less than the given start
      */
     public static int[] slice(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if (start < 0 || end < 0 || end < start) {
+        	throw new IllegalArgumentException();
+        }
+        return Arrays.copyOfRange(fibonacci(end), start, end);
     }
 
     /**
@@ -49,6 +57,23 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given count is negative
      */
     public static int[] fibonacci(int count) throws IllegalArgumentException {
-        throw new NotImplementedException();
-    }
+        if (count < 0) {
+        	throw new IllegalArgumentException();
+        }
+        
+        int[] fibonacciArray = new int[count];
+       
+        if (count == 0) {
+        	return fibonacciArray;}
+        fibonacciArray[0] = 1;
+        
+        if (count == 1) {
+        	return fibonacciArray;}
+        fibonacciArray[1] = 1;
+        
+        for (int i = 2; i < count; i++) {
+        	fibonacciArray[i] = fibonacciArray[i-2] + fibonacciArray[i-1];
+        }
+        return fibonacciArray;
+}
 }

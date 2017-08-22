@@ -1,5 +1,8 @@
 package com.cooksys.ftd.assignments.control;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -26,7 +29,9 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if b is zero
      */
     public static boolean divides(int a, int b) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if (b == 0)
+    		throw new IllegalArgumentException();
+        return (a%b == 0);
     }
 
     /**
@@ -41,7 +46,15 @@ public class FizzBuzz {
      * @return a message according to the format above, or null if n is not divisible by either 3 or 5
      */
     public static String message(int n) {
-        throw new NotImplementedException();
+        if (n%3 == 0 && n%5 != 0)
+        	return n + ": Fizz";
+        if (n%5 == 0 && n%3 != 0)
+        	return n + ": Buzz";
+        if (n%3 == 0 && n%5 == 0)
+        	return n + ": FizzBuzz";
+        else {
+        	return null;
+        }
     }
 
     /**
@@ -55,7 +68,21 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if the given end is less than the given start
      */
     public static String[] messages(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if (end < start){
+    		throw new IllegalArgumentException();
+    	}
+    	
+    	List<String> messagesBuilder = new ArrayList<String>();
+    	
+    	for (int i = start; i < end; i++) {
+    		if (message(i) != null)
+        		messagesBuilder.add(message(i));
+    	}
+    	
+    	String[] returnMessages = new String[messagesBuilder.size()];
+    	returnMessages = messagesBuilder.toArray(returnMessages);
+    	return returnMessages;
+    	
     }
 
     /**
@@ -63,7 +90,13 @@ public class FizzBuzz {
      * the relevant messages to sysout
      */
     public static void main(String[] args) {
-        throw new NotImplementedException();
+//        for (int i = 1; i <= 115; i++) {
+//        	System.out.println(message(i));
+//        }
+    	String[] returnPrints = messages(1, 115);
+    	for (String message: returnPrints) {
+    		System.out.println(message);
+    	}
     }
 
 }
