@@ -12,10 +12,6 @@ import java.util.*;
 public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	
 	HashSet<Capitalist> allCapitalists = new HashSet<Capitalist>();
-	// ADD EVERYTHING TO HASHSET
-	// USE HASHSET TO POPULATE HASHMAP
-	// ALL KIDS IN VALUE PAIRING
-	// USE THAT TO getChildren()
 
     /**
      * Adds a given element to the hierarchy.
@@ -29,7 +25,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      * 
      * <p>
      * If the given element has no parent but is a Parent itself,
-     * add it to the hierarchy
+     * add it to the hierarchy 
      * <p>
      * If the given element has no parent and is not a Parent itself,
      * do not add it and return false
@@ -38,11 +34,10 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      * @return true if the element was added successfully, false otherwise
      */
     @Override
+    
     public boolean add(Capitalist capitalist) {
-    	// could be done using the built in hashSet guard against duplicates
-    	//which would still return false
     	
-        if ( capitalist == null || !capitalist.hasParent() && capitalist instanceof WageSlave) {
+        if (capitalist == null || !capitalist.hasParent() && capitalist instanceof WageSlave) {
         	return false;
         }
         else {
@@ -58,12 +53,10 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
     @Override
     public boolean has(Capitalist capitalist) {
     	
-        if (allCapitalists.contains(capitalist)){
+        if (allCapitalists.contains(capitalist))
         	return true;
-        }
-        else {
+        else
         	return false;
-        }
     }
 
     /**
@@ -75,8 +68,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
     public Set<Capitalist> getElements() {
 		
     	Set<Capitalist> newSet = new HashSet<>(allCapitalists);
-    	
-        return newSet;
+    	return newSet;
     }
 
     /**
@@ -157,12 +149,9 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
     	}
         return parentChain;
     }
-    
-    
-    
-    
-    
-    
+
+  
+    // Over-ridden hashCode and equals
 
 	@Override
 	public int hashCode() {
