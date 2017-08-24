@@ -41,26 +41,14 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
     public boolean add(Capitalist capitalist) {
     	// could be done using the built in hashSet guard against duplicates
     	//which would still return false
-        if (has(capitalist) || capitalist == null) {
+    	
+        if ( capitalist == null || !capitalist.hasParent() && capitalist instanceof WageSlave) {
         	return false;
         }
-        if (capitalist.hasParent()) {
-        	allCapitalists.add(capitalist);
-        	if (!has(capitalist.getParent())) {
-        		add(capitalist.getParent());}
-        	return true;
+        else {
+        	add(capitalist.getParent());
         }
-        
-        if (!capitalist.hasParent() && capitalist instanceof FatCat) {
-        	allCapitalists.add(capitalist);
-        	return true;
-        }
-        if (!capitalist.hasParent() && capitalist instanceof WageSlave) 
-        	return false;
-        else 
-        	return false;
-//        if (!capitalist.hasParent() && capitalist instanceof WageSlave) {
-//        	return false;
+        return allCapitalists.add(capitalist);
     }
 
     /**
@@ -69,6 +57,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public boolean has(Capitalist capitalist) {
+    	
         if (allCapitalists.contains(capitalist)){
         	return true;
         }
@@ -84,10 +73,8 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 
 	@Override
     public Set<Capitalist> getElements() {
-    	Set<Capitalist> newSet = new HashSet<>();
-    	for (Capitalist captialist : allCapitalists) {
-    		newSet.add(captialist);
-    	}
+		
+    	Set<Capitalist> newSet = new HashSet<>(allCapitalists);
     	
         return newSet;
     }
@@ -98,14 +85,15 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public Set<FatCat> getParents() {
+    	
         Set<FatCat> demCats = new HashSet<>();
+        
         for (Capitalist capitalist: allCapitalists) {
-        	if (capitalist instanceof FatCat) {
+        	if (capitalist instanceof FatCat)
         		demCats.add((FatCat) capitalist);
-        	}
         }
         return demCats;
-        }
+    }
         
 
     /**
@@ -116,19 +104,18 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public Set<Capitalist> getChildren(FatCat fatCat) {
+    	
         Set<Capitalist> kiddieSet = new HashSet<>();
         
-    	if (!has(fatCat)) {
+    	if (!has(fatCat))
     		return kiddieSet;
-    	}
+    	
         for (Capitalist kiddo: allCapitalists) {
-        	if (fatCat == kiddo.getParent()){
+        	if (fatCat == kiddo.getParent())
         		kiddieSet.add(kiddo);
-        	}
         }
         return kiddieSet;
     }
-    
     
 
     /** 
@@ -138,7 +125,8 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public Map<FatCat, Set<Capitalist>> getHierarchy() {
-        Map<FatCat, Set<Capitalist>> catMap =  new HashMap<>();
+        
+    	Map<FatCat, Set<Capitalist>> catMap =  new HashMap<>();
 
         for (FatCat fatCat: getParents()) {
         	catMap.put(fatCat, getChildren(fatCat)); 
@@ -157,10 +145,10 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
     	
         List<FatCat> parentChain = new ArrayList<>();
         
-        if (!has(capitalist)){
+        if (!has(capitalist))
         	return parentChain;
-        }
-    	if (capitalist.hasParent() || has(capitalist.getParent())) {
+        
+    	if (capitalist.hasParent()) {
         	FatCat nextUp = capitalist.getParent();
         	while (nextUp != null) {
         		parentChain.add(nextUp);
