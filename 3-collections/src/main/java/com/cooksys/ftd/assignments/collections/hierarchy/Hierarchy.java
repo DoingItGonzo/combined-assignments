@@ -41,7 +41,7 @@ public interface Hierarchy<Element extends Hierarchical<Element, Parent>, Parent
      * or an empty set if no elements have been added to the hierarchy
      */
     Set<Element> getElements();
-
+    	
     /**
      * @return all parent elements in the hierarchy,
      * or an empty set if no parents have been added to the hierarchy
