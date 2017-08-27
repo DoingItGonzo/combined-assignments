@@ -37,6 +37,8 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
     
     public boolean add(Capitalist capitalist) {
     	
+    	// A HashSet will not allow duplicates, so even though this method will send duplicate parents to...
+    	// ... the collection, the HashSet will simply bounce them into garbage collection.
         if (capitalist == null || !capitalist.hasParent() && capitalist instanceof WageSlave) {
         	return false;
         }
