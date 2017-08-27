@@ -27,7 +27,7 @@ public class Utils {
     	JAXBContext jaxb = null;
     	
 		try {
-			jaxb = JAXBContext.newInstance(Config.class, RemoteConfig.class, LocalConfig.class, Student.class);
+			jaxb = JAXBContext.newInstance(Config.class, Student.class);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}

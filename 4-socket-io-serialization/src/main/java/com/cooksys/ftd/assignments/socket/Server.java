@@ -58,7 +58,6 @@ public class Server extends Utils {
     	Config config = loadConfig("C:/Users/ftd-16/workspace/combined-assignments/4-socket-io-serialization/config/config.xml", jaxb);
     	LocalConfig localConfig = config.getLocal();
         int port = localConfig.getPort();
-        System.out.println(port);
         
         ServerSocket serveSocket = new ServerSocket(port);
         System.out.println("Server waiting");
@@ -66,25 +65,12 @@ public class Server extends Utils {
         Socket client = serveSocket.accept();
         System.out.println("client connected!");
 
-        
-        Student student = loadStudent("C:/Users/ftd-16/workspace/combined-assignments/4-socket-io-serialization/config/student.xml", jaxb);
-        
     	OutputStream out = client.getOutputStream();
-
+        Student student = loadStudent("C:/Users/ftd-16/workspace/combined-assignments/4-socket-io-serialization/config/student.xml", jaxb);
         Marshaller marshaller = jaxb.createMarshaller();
         marshaller.marshal(student, out);
         
         serveSocket.close();
         client.close();
-        
-        
-//        try (ServerSocket serverSocket = new ServerSocket()) {
-//        Socket client = serverSocket.accept();
-//        BufferedReader buffRead = new BufferedReader(new InputStreamReader(client.getInputStream()));
-//        } catch (Exception e) {
-//        	e.printStackTrace;
-//        }
-//    	InputStream incoming = socket.getInputStream(); 
-//    	OutputStream out = socket.getOutputStream();
-}
+    }
 }

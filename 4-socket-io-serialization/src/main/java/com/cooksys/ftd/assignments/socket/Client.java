@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -19,7 +21,7 @@ import com.cooksys.ftd.assignments.socket.model.Student;
 public class Client extends Utils {
 	
 
-    public static void main(String[] args) throws JAXBException, UnknownHostException, IOException {
+    public static void main(String[] args) throws JAXBException, UnknownHostException, IOException, IllegalArgumentException, IllegalAccessException {
     	
     	JAXBContext jaxb = createJAXBContext();
     	
